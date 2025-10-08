@@ -1,0 +1,120 @@
+<!--diet.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">饮食记录</text>
+  </view>
+
+  <!-- 餐次选择 -->
+  <view class="card meal-type">
+    <view class="card-title">选择餐次</view>
+    <view class="meal-types">
+      <button class="meal-type-btn {{selectedMeal === 'breakfast' ? 'active' : ''}}"
+              bindtap="selectMealType" data-meal="breakfast">
+        <text class="meal-icon">🌅</text>
+        <text>早餐</text>
+      </button>
+      <button class="meal-type-btn {{selectedMeal === 'lunch' ? 'active' : ''}}"
+              bindtap="selectMealType" data-meal="lunch">
+        <text class="meal-icon">☀️</text>
+        <text>午餐</text>
+      </button>
+      <button class="meal-type-btn {{selectedMeal === 'dinner' ? 'active' : ''}}"
+              bindtap="selectMealType" data-meal="dinner">
+        <text class="meal-icon">🌙</text>
+        <text>晚餐</text>
+      </button>
+      <button class="meal-type-btn {{selectedMeal === 'snack' ? 'active' : ''}}"
+              bindtap="selectMealType" data-meal="snack">
+        <text class="meal-icon">🍎</text>
+        <text>加餐</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 饮食详情表单 -->
+  <view class="card diet-form">
+    <view class="card-title">饮食详情</view>
+
+    <view class="form-item">
+      <text class="form-label">餐次</text>
+      <input class="input" placeholder="请选择餐次"
+             value="{{mealTypeText}}" readonly />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">食物名称</text>
+      <input class="input" placeholder="请输入食物名称"
+             value="{{foodName}}" bindinput="onFoodNameInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">份量（克）</text>
+      <input class="input" type="number" placeholder="请输入食物份量"
+             value="{{portion}}" bindinput="onPortionInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">预估卡路里（可选）</text>
+      <input class="input" type="number" placeholder="请输入预估卡路里"
+             value="{{calories}}" bindinput="onCaloriesInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">备注（可选）</text>
+      <textarea class="input textarea" placeholder="记录饮食感受、烹饪方式等信息"
+                value="{{notes}}" bindinput="onNotesInput"></textarea>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="submit-section">
+    <button class="btn submit-btn" bindtap="saveDiet" disabled="{{!canSave}}">
+      保存饮食记录
+    </button>
+  </view>
+
+  <!-- 今日饮食记录 -->
+  <view class="card today-records" wx:if="{{todayRecords.length > 0}}">
+    <view class="card-title">今日饮食记录</view>
+
+    <!-- 按餐次分组显示 -->
+    <view class="meal-group" wx:for="{{groupedRecords}}" wx:key="mealType">
+      <view class="meal-group-title">
+        <text>{{item.mealTypeText}}</text>
+        <text class="meal-total-calories">{{item.totalCalories}}卡路里</text>
+      </view>
+      <view class="record-list">
+        <view class="record-item" wx:for="{{item.records}}" wx:for-item="record" wx:key="id">
+          <view class="record-info">
+            <text class="record-food">{{record.foodName}}</text>
+            <text class="record-portion">{{record.portion}}g</text>
+            <text class="record-calories" wx:if="{{record.calories}}">{{record.calories}}卡</text>
+          </view>
+          <button class="btn btn-small btn-danger" bindtap="deleteRecord" data-id="{{record.id}}">
+            删除
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 今日饮食统计 -->
+  <view class="card today-summary" wx:if="{{todaySummary.totalRecords > 0}}">
+    <view class="card-title">今日饮食统计</view>
+    <view class="summary-stats">
+      <view class="summary-item">
+        <text class="summary-label">总记录数</text>
+        <text class="summary-value">{{todaySummary.totalRecords}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">总卡路里</text>
+        <text class="summary-value text-primary">{{todaySummary.totalCalories}}</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-label">餐次覆盖</text>
+        <text class="summary-value">{{todaySummary.mealTypes}}/4</text>
+      </view>
+    </view>
+  </view>
+</view>

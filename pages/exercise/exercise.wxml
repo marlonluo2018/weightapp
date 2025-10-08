@@ -1,0 +1,97 @@
+<!--exercise.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">运动打卡</text>
+  </view>
+
+  <!-- 快速选择 -->
+  <view class="card quick-select">
+    <view class="card-title">快速选择运动类型</view>
+    <view class="exercise-types">
+      <button class="exercise-type-btn {{selectedType === 'running' ? 'active' : ''}}"
+              bindtap="selectExerciseType" data-type="running">
+        <text class="exercise-icon">🏃</text>
+        <text>跑步</text>
+      </button>
+      <button class="exercise-type-btn {{selectedType === 'walking' ? 'active' : ''}}"
+              bindtap="selectExerciseType" data-type="walking">
+        <text class="exercise-icon">🚶</text>
+        <text>步行</text>
+      </button>
+      <button class="exercise-type-btn {{selectedType === 'cycling' ? 'active' : ''}}"
+              bindtap="selectExerciseType" data-type="cycling">
+        <text class="exercise-icon">🚴</text>
+        <text>骑行</text>
+      </button>
+      <button class="exercise-type-btn {{selectedType === 'swimming' ? 'active' : ''}}"
+              bindtap="selectExerciseType" data-type="swimming">
+        <text class="exercise-icon">🏊</text>
+        <text>游泳</text>
+      </button>
+      <button class="exercise-type-btn {{selectedType === 'yoga' ? 'active' : ''}}"
+              bindtap="selectExerciseType" data-type="yoga">
+        <text class="exercise-icon">🧘</text>
+        <text>瑜伽</text>
+      </button>
+      <button class="exercise-type-btn {{selectedType === 'gym' ? 'active' : ''}}"
+              bindtap="selectExerciseType" data-type="gym">
+        <text class="exercise-icon">💪</text>
+        <text>健身</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 运动详情表单 -->
+  <view class="card exercise-form">
+    <view class="card-title">运动详情</view>
+
+    <view class="form-item">
+      <text class="form-label">运动类型</text>
+      <input class="input" placeholder="请选择或输入运动类型"
+             value="{{exerciseType}}" bindinput="onExerciseTypeInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">运动时长（分钟）</text>
+      <input class="input" type="number" placeholder="请输入运动时长"
+             value="{{duration}}" bindinput="onDurationInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">消耗卡路里（可选）</text>
+      <input class="input" type="number" placeholder="请输入消耗的卡路里"
+             value="{{calories}}" bindinput="onCaloriesInput" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">备注（可选）</text>
+      <textarea class="input textarea" placeholder="记录运动感受、地点等信息"
+                value="{{notes}}" bindinput="onNotesInput"></textarea>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="submit-section">
+    <button class="btn submit-btn" bindtap="saveExercise" disabled="{{!canSave}}">
+      保存运动记录
+    </button>
+  </view>
+
+  <!-- 今日运动记录 -->
+  <view class="card today-records" wx:if="{{todayRecords.length > 0}}">
+    <view class="card-title">今日运动记录</view>
+    <view class="record-list">
+      <view class="record-item" wx:for="{{todayRecords}}" wx:key="id">
+        <view class="record-info">
+          <text class="record-type">{{item.type}}</text>
+          <text class="record-duration">{{item.duration}}分钟</text>
+          <text class="record-calories" wx:if="{{item.calories}}">{{item.calories}}卡路里</text>
+        </view>
+        <button class="btn btn-small btn-danger" bindtap="deleteRecord" data-id="{{item.id}}">
+          删除
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

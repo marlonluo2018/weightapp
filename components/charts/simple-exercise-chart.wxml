@@ -1,0 +1,27 @@
+<!--simple-exercise-chart.wxml-->
+<view class="simple-exercise-chart">
+  <view class="chart-header">
+    <text class="chart-title">运动类型分布</text>
+  </view>
+
+  <view class="chart-content" wx:if="{{chartData.length > 0}}">
+    <view class="exercise-list">
+      <view class="exercise-item"
+            wx:for="{{chartData}}"
+            wx:key="type">
+        <view class="exercise-info">
+          <text class="exercise-type">{{item.type}}</text>
+          <text class="exercise-stats">{{item.duration}}分钟 ({{item.percentage}}%)</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill progress-{{item.width || 0}} progress-color-{{item.color || 'default'}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="no-data" wx:else>
+    <text class="no-data-text">暂无运动数据</text>
+    <text class="no-data-tip">开始运动来查看类型分布</text>
+  </view>
+</view>

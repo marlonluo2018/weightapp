@@ -1,0 +1,126 @@
+/**app.wxss - 清新绿色主题**/
+page {
+  background-color: #f8fafb;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+}
+
+.container {
+  padding: 10rpx;
+  min-height: 100vh;
+  background-color: #f8fafb;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.08);
+  border: 1rpx solid #e2e8f0;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 20rpx;
+}
+
+.btn {
+  background-color: #48bb78;
+  color: #ffffff;
+  border-radius: 8rpx;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  border: none;
+  margin: 10rpx;
+  transition: all 0.2s ease;
+}
+
+.btn:active {
+  background-color: #38a169;
+  transform: translateY(1rpx);
+}
+
+.btn-secondary {
+  background-color: #edf2f7;
+  color: #4a5568;
+}
+
+.btn-secondary:active {
+  background-color: #e2e8f0;
+}
+
+.btn-danger {
+  background-color: #f56565;
+}
+
+.btn-danger:active {
+  background-color: #e53e3e;
+}
+
+.input {
+  border: 1rpx solid #e2e8f0;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  margin: 10rpx 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: #48bb78;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: #48bb78;
+}
+
+.text-success {
+  color: #48bb78;
+}
+
+.text-warning {
+  color: #ed8936;
+}
+
+.text-danger {
+  color: #f56565;
+}
+
+.text-info {
+  color: #4299e1;
+}
+
+.mt-20 {
+  margin-top: 20rpx;
+}
+
+.mb-20 {
+  margin-bottom: 20rpx;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+  align-items: center;
+} 

@@ -1,0 +1,103 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 用户信息和今日概览合并组件 -->
+  <user-progress class="user-progress"></user-progress>
+  
+  <!-- 减肥目标进度 -->
+  <view class="card weight-goal" wx:if="{{goalProgress.daysLeft > 0 || goalProgress.weightToLose > 0}}">
+    <view class="card-title">减肥目标</view>
+    <view class="goal-progress">
+      <!-- 目标天数统计 -->
+      <view class="goal-stats">
+        <view class="goal-stat-item">
+          <text class="goal-stat-value">{{goalProgress.daysLeft}}</text>
+          <text class="goal-stat-label">距离目标(天)</text>
+        </view>
+        <view class="goal-stat-item">
+          <text class="goal-stat-value">{{goalProgress.weightToLose}}</text>
+          <text class="goal-stat-label">还需减重(kg)</text>
+        </view>
+        <view class="goal-stat-item">
+          <text class="goal-stat-value">{{goalProgress.exerciseDays || 0}}</text>
+          <text class="goal-stat-label">运动打卡天数</text>
+        </view>
+        <view class="goal-stat-item">
+          <text class="goal-stat-value">{{goalProgress.dietDays || 0}}</text>
+          <text class="goal-stat-label">饮食打卡天数</text>
+        </view>
+        <view class="goal-stat-item">
+          <text class="goal-stat-value">{{goalProgress.missedDays || 0}}</text>
+          <text class="goal-stat-label">未打卡天数</text>
+        </view>
+      </view>
+      
+      <view class="progress-bar">
+        <view class="progress-fill progress-{{goalProgress.percentage || 0}}"></view>
+      </view>
+      <text class="progress-percentage">{{goalProgress.percentage}}% 完成</text>
+    </view>
+  </view>
+
+  <!-- 今日打卡记录详情 -->
+  <view class="today-records">
+    <view class="records-list">
+      <!-- 今日运动记录 -->
+      <view class="card exercise-stats" wx:if="{{todayExercise.length > 0}}">
+        <view class="card-title">今日运动</view>
+        <view class="stats-list">
+          <view class="stats-item" wx:for="{{todayExercise}}" wx:key="id">
+            <view class="stats-info">
+              <text class="stats-name">{{item.type || '运动'}}</text>
+              <text class="stats-count">{{item.duration}}分钟</text>
+            </view>
+            <view class="stats-details">
+              <text class="stats-duration" wx:if="{{item.time}}">{{item.time}}</text>
+              <text class="stats-calories" wx:if="{{item.calories}}">消耗 {{item.calories}}千卡</text>
+              <text class="stats-intensity" wx:if="{{item.intensity}}">{{item.intensity}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 今日饮食记录 -->
+      <view class="card diet-analysis" wx:if="{{todayDiet.length > 0}}">
+        <view class="card-title">今日饮食</view>
+        <view class="meal-stats">
+          <view class="meal-stat-item" wx:for="{{todayDiet}}" wx:key="id">
+            <view class="meal-info">
+              <text class="meal-name">{{item.foodName}}</text>
+              <text class="meal-count">{{item.mealTypeText || '餐'}}</text>
+            </view>
+            <view class="meal-calories">
+              <text class="calories-text">{{item.calories}}千卡</text>
+            </view>
+            <text class="meal-portion" wx:if="{{item.portion}}">{{item.portion}}份</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 今日体重记录 -->
+      <view class="card weight-stats" wx:if="{{todayWeight.length > 0}}">
+        <view class="card-title">今日体重</view>
+        <view class="stats-list">
+          <view class="stats-item" wx:for="{{todayWeight}}" wx:key="id">
+            <view class="stats-info">
+              <text class="stats-name">体重记录</text>
+              <text class="stats-count">{{item.weight}}kg</text>
+            </view>
+            <view class="stats-details">
+              <text class="stats-time">{{item.time}}</text>
+              <text class="stats-bmi" wx:if="{{item.bmi}}">BMI: {{item.bmi}}</text>
+              <text class="stats-change" wx:if="{{item.change}}">{{item.change > 0 ? '+' : ''}}{{item.change}}kg</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 无记录提示 -->
+      <view class="no-records" wx:if="{{todayExercise.length === 0 && todayDiet.length === 0 && todayWeight.length === 0}}">
+        <text class="no-records-text">今天还没有打卡记录</text>
+      </view>
+    </view>
+  </view>
+</view>

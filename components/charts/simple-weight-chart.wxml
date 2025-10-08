@@ -1,0 +1,29 @@
+<!--simple-weight-chart.wxml-->
+<view class="simple-weight-chart">
+  <view class="chart-header">
+    <text class="chart-title">体重趋势</text>
+    <text class="chart-subtitle" wx:if="{{chartData.length > 0}}">
+      最近{{chartData.length}}次记录
+    </text>
+  </view>
+
+  <view class="chart-container" wx:if="{{chartData.length > 0}}">
+    <view class="chart-bars">
+      <view class="bar-item"
+            wx:for="{{chartData}}"
+            wx:key="date">
+        <view class="bar-label">{{item.label}}</view>
+        <view class="bar-wrapper">
+          <view class="bar bar-height-{{item.height || 0}} bar-gradient-default">
+          </view>
+          <text class="bar-value">{{item.weight}}kg</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="no-data" wx:else>
+    <text class="no-data-text">暂无体重数据</text>
+    <text class="no-data-tip">开始记录体重来查看趋势</text>
+  </view>
+</view>

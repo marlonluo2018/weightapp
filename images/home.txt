@@ -1,0 +1,2 @@
+Home Icon - 需要替换为PNG文件
+建议使用40x40px的PNG图标

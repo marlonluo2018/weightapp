@@ -1,0 +1,6 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "simple-weight-chart": "/components/charts/simple-weight-chart"
+  }
+}

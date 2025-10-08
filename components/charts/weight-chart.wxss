@@ -1,0 +1,69 @@
+/* weight-chart.wxss */
+.weight-chart {
+  background: white;
+  border-radius: 16rpx;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.chart-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.chart-subtitle {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.chart-canvas {
+  width: 100%;
+  height: auto;
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200rpx;
+  text-align: center;
+}
+
+.no-data-text {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.no-data-tip {
+  font-size: 22rpx;
+  color: #ccc;
+}
+
+/* 图表高度样式 */
+.chart-height-200 { height: 200rpx; }
+.chart-height-250 { height: 250rpx; }
+.chart-height-300 { height: 300rpx; }
+.chart-height-350 { height: 350rpx; }
+.chart-height-400 { height: 400rpx; }
+.chart-height-450 { height: 450rpx; }
+.chart-height-500 { height: 500rpx; }
+.chart-height-550 { height: 550rpx; }
+.chart-height-600 { height: 600rpx; }

@@ -1,0 +1,625 @@
+/**statistics.wxss**/
+.page-header {
+  text-align: center;
+  margin-bottom: 40rpx;
+  padding: 30rpx 0;
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  border-radius: 20rpx;
+  color: white;
+  box-shadow: 0 8rpx 25rpx rgba(72, 187, 120, 0.15);
+}
+
+.page-title {
+  font-size: 44rpx;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.filter-section {
+  margin-bottom: 20rpx;
+}
+
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.filter-tab {
+  padding: 15rpx 30rpx;
+  background-color: #f7fafc;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #4a5568;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.filter-tab:active {
+  background-color: #edf2f7;
+}
+
+.filter-tab.active {
+  background-color: #48bb78;
+  color: white;
+  border-color: #48bb78;
+}
+
+.filter-tab:active {
+  background-color: #e8f5e8;
+}
+
+.nav-arrow {
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.current-month {
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #333;
+  min-width: 180rpx;
+  text-align: center;
+}
+
+.overview-stats {
+  margin-bottom: 20rpx;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx 20rpx;
+  border-radius: 16rpx;
+  text-align: center;
+}
+
+.exercise-stat {
+  background-color: #48bb78;
+  color: white;
+}
+
+.diet-stat {
+  background-color: #ed8936;
+  color: white;
+}
+
+.weight-stat {
+  background-color: #4299e1;
+  color: white;
+}
+
+.stat-icon {
+  font-size: 40rpx;
+  margin-bottom: 15rpx;
+  opacity: 0.9;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  opacity: 0.9;
+  margin-bottom: 5rpx;
+}
+
+.stat-detail {
+  font-size: 22rpx;
+  opacity: 0.8;
+}
+
+.exercise-stats, .weight-chart, .diet-analysis, .calendar-heatmap, .achievements {
+  margin-top: 20rpx;
+}
+
+.stats-list {
+  margin-top: 20rpx;
+}
+
+.stats-item {
+  margin-bottom: 25rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.stats-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.stats-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.stats-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.stats-count {
+  font-size: 24rpx;
+  color: #07c160;
+  font-weight: 500;
+}
+
+.stats-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.stats-duration {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.stats-calories {
+  font-size: 24rpx;
+  color: #ff9500;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8rpx;
+  background-color: #f0f0f0;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #48bb78;
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+.chart-container {
+  display: flex;
+  margin-top: 20rpx;
+  height: 400rpx;
+}
+
+.chart-y-axis {
+  width: 80rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.y-axis-label {
+  font-size: 20rpx;
+  color: #999;
+  text-align: right;
+  margin-right: 10rpx;
+}
+
+.chart-content {
+  flex: 1;
+  position: relative;
+  margin-left: 20rpx;
+}
+
+.chart-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40rpx;
+}
+
+.grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1rpx;
+  background-color: #f0f0f0;
+}
+
+.chart-data {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40rpx;
+}
+
+.data-point {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.point {
+  width: 12rpx;
+  height: 12rpx;
+  background-color: #07c160;
+  border-radius: 50%;
+  border: 2rpx solid white;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.data-label {
+  position: absolute;
+  top: -30rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20rpx;
+  color: #666;
+  background-color: white;
+  padding: 4rpx 8rpx;
+  border-radius: 4rpx;
+  white-space: nowrap;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.chart-x-axis {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.x-axis-label {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.meal-stats {
+  margin-top: 20rpx;
+}
+
+.meal-stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.meal-stat-item:last-child {
+  border-bottom: none;
+}
+
+.meal-info {
+  flex: 1;
+}
+
+.meal-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5rpx;
+  display: block;
+}
+
+.meal-count {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.meal-calories {
+  margin: 0 20rpx;
+}
+
+.calories-text {
+  font-size: 26rpx;
+  color: #ff9500;
+  font-weight: 500;
+}
+
+.meal-percentage {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #07c160;
+}
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15rpx;
+  margin-bottom: 20rpx;
+}
+
+.calendar-legend text {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.legend-colors {
+  display: flex;
+  gap: 4rpx;
+}
+
+.legend-color {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 3rpx;
+}
+
+.calendar-month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  margin: 20rpx 0;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.calendar-month-nav-btn {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1rpx solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20rpx;
+  color: #666;
+  transition: all 0.3s ease;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.calendar-month-nav-btn:active {
+  background-color: #f5f5f5;
+  transform: scale(0.95);
+}
+
+.calendar-month-nav-btn[disabled] {
+  opacity: 0.3;
+  background-color: #fafafa;
+  color: #ccc;
+  border-color: #f0f0f0;
+}
+
+.calendar-weekdays {
+  display: flex;
+  gap: 3rpx;
+  margin-bottom: 10rpx;
+  padding: 0;
+}
+
+.weekday {
+  flex: 1;
+  text-align: center;
+  font-size: 20rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+.calendar-grid {
+  margin-top: 20rpx;
+}
+
+.calendar-week {
+  display: flex;
+  gap: 3rpx;
+  margin-bottom: 3rpx;
+  align-items: stretch;
+}
+
+.calendar-day {
+  flex: 1;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 3rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16rpx;
+  position: relative;
+}
+
+.calendar-day.today {
+  border: 2rpx solid #ff6b35;
+  box-shadow: 0 0 0 2rpx rgba(255, 107, 53, 0.2);
+}
+
+.level-0 {
+  background-color: #f0f0f0;
+}
+
+.level-1 {
+  background-color: #c6e48b;
+}
+
+.level-2 {
+  background-color: #7bc96f;
+}
+
+.level-3 {
+  background-color: #239a3b;
+}
+
+.level-4 {
+  background-color: #196127;
+}
+
+.day-date {
+  color: #666;
+  font-size: 16rpx;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.achievement-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25rpx 15rpx;
+  border-radius: 12rpx;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.achievement-item.unlocked {
+  
+  box-shadow: 0 4rpx 15rpx rgba(255, 215, 0, 0.3);
+}
+
+.achievement-item.locked {
+  background-color: #f8f8f8;
+  opacity: 0.6;
+}
+
+.achievement-icon {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.achievement-name {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5rpx;
+}
+
+.achievement-desc {
+  font-size: 20rpx;
+  color: #666;
+  line-height: 1.3;
+}
+
+/* 进度条百分比样式 */
+.progress-0 { width: 0%; }
+.progress-1 { width: 1%; }
+.progress-2 { width: 2%; }
+.progress-3 { width: 3%; }
+.progress-4 { width: 4%; }
+.progress-5 { width: 5%; }
+.progress-6 { width: 6%; }
+.progress-7 { width: 7%; }
+.progress-8 { width: 8%; }
+.progress-9 { width: 9%; }
+.progress-10 { width: 10%; }
+.progress-11 { width: 11%; }
+.progress-12 { width: 12%; }
+.progress-13 { width: 13%; }
+.progress-14 { width: 14%; }
+.progress-15 { width: 15%; }
+.progress-16 { width: 16%; }
+.progress-17 { width: 17%; }
+.progress-18 { width: 18%; }
+.progress-19 { width: 19%; }
+.progress-20 { width: 20%; }
+.progress-21 { width: 21%; }
+.progress-22 { width: 22%; }
+.progress-23 { width: 23%; }
+.progress-24 { width: 24%; }
+.progress-25 { width: 25%; }
+.progress-26 { width: 26%; }
+.progress-27 { width: 27%; }
+.progress-28 { width: 28%; }
+.progress-29 { width: 29%; }
+.progress-30 { width: 30%; }
+.progress-31 { width: 31%; }
+.progress-32 { width: 32%; }
+.progress-33 { width: 33%; }
+.progress-34 { width: 34%; }
+.progress-35 { width: 35%; }
+.progress-36 { width: 36%; }
+.progress-37 { width: 37%; }
+.progress-38 { width: 38%; }
+.progress-39 { width: 39%; }
+.progress-40 { width: 40%; }
+.progress-41 { width: 41%; }
+.progress-42 { width: 42%; }
+.progress-43 { width: 43%; }
+.progress-44 { width: 44%; }
+.progress-45 { width: 45%; }
+.progress-46 { width: 46%; }
+.progress-47 { width: 47%; }
+.progress-48 { width: 48%; }
+.progress-49 { width: 49%; }
+.progress-50 { width: 50%; }
+.progress-51 { width: 51%; }
+.progress-52 { width: 52%; }
+.progress-53 { width: 53%; }
+.progress-54 { width: 54%; }
+.progress-55 { width: 55%; }
+.progress-56 { width: 56%; }
+.progress-57 { width: 57%; }
+.progress-58 { width: 58%; }
+.progress-59 { width: 59%; }
+.progress-60 { width: 60%; }
+.progress-61 { width: 61%; }
+.progress-62 { width: 62%; }
+.progress-63 { width: 63%; }
+.progress-64 { width: 64%; }
+.progress-65 { width: 65%; }
+.progress-66 { width: 66%; }
+.progress-67 { width: 67%; }
+.progress-68 { width: 68%; }
+.progress-69 { width: 69%; }
+.progress-70 { width: 70%; }
+.progress-71 { width: 71%; }
+.progress-72 { width: 72%; }
+.progress-73 { width: 73%; }
+.progress-74 { width: 74%; }
+.progress-75 { width: 75%; }
+.progress-76 { width: 76%; }
+.progress-77 { width: 77%; }
+.progress-78 { width: 78%; }
+.progress-79 { width: 79%; }
+.progress-80 { width: 80%; }
+.progress-81 { width: 81%; }
+.progress-82 { width: 82%; }
+.progress-83 { width: 83%; }
+.progress-84 { width: 84%; }
+.progress-85 { width: 85%; }
+.progress-86 { width: 86%; }
+.progress-87 { width: 87%; }
+.progress-88 { width: 88%; }
+.progress-89 { width: 89%; }
+.progress-90 { width: 90%; }
+.progress-91 { width: 91%; }
+.progress-92 { width: 92%; }
+.progress-93 { width: 93%; }
+.progress-94 { width: 94%; }
+.progress-95 { width: 95%; }
+.progress-96 { width: 96%; }
+.progress-97 { width: 97%; }
+.progress-98 { width: 98%; }
+.progress-99 { width: 99%; }
+.progress-100 { width: 100%; }
+
+/* 图例颜色样式 */
+.legend-color-1 { background-color: #f0f0f0; }
+.legend-color-2 { background-color: #c6e48b; }
+.legend-color-3 { background-color: #7bc96f; }
+.legend-color-4 { background-color: #239a3b; }
+.legend-color-5 { background-color: #196127; }

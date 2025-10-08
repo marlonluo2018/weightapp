@@ -1,0 +1,151 @@
+<!--statistics.wxml-->
+<view class="container">
+
+  <view class="page-header">
+    <text class="page-title">统计数据</text>
+  </view>
+
+  <!-- 时间筛选 -->
+  <view class="card filter-section">
+    <view class="filter-tabs">
+      <button class="filter-tab {{activeTab === 'week' ? 'active' : ''}}"
+              bindtap="switchTab" data-tab="week">本周</button>
+      <button class="filter-tab {{activeTab === 'month' ? 'active' : ''}}"
+              bindtap="switchTab" data-tab="month">本月</button>
+      <button class="filter-tab {{activeTab === 'all' ? 'active' : ''}}"
+              bindtap="switchTab" data-tab="all">全部</button>
+    </view>
+  </view>
+
+  <!-- 统计概览 -->
+  <view class="card overview-stats">
+    <view class="card-title">统计概览</view>
+    <view class="stats-grid">
+      <view class="stat-card exercise-stat">
+        <text class="stat-icon">🏃</text>
+        <text class="stat-value">{{overviewStats.exercise.totalMinutes}}</text>
+        <text class="stat-label">总运动(分钟)</text>
+        <text class="stat-detail">{{overviewStats.exercise.sessions}}次</text>
+      </view>
+      <view class="stat-card diet-stat">
+        <text class="stat-icon">🍽️</text>
+        <text class="stat-value">{{overviewStats.diet.totalRecords}}</text>
+        <text class="stat-label">饮食记录</text>
+        <text class="stat-detail">{{overviewStats.diet.totalCalories}}卡路里</text>
+      </view>
+      <view class="stat-card weight-stat">
+        <text class="stat-icon">⚖️</text>
+        <text class="stat-value">{{overviewStats.weight.change}}</text>
+        <text class="stat-label">体重变化</text>
+        <text class="stat-detail">{{overviewStats.weight.records}}次记录</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 体重趋势图表 -->
+  <simple-weight-chart data="{{weightHistory}}"></simple-weight-chart>
+
+  <!-- 运动统计 -->
+  <view class="card exercise-stats" wx:if="{{exerciseStats.length > 0}}">
+    <view class="card-title">运动详情</view>
+    <view class="stats-list">
+      <view class="stats-item" wx:for="{{exerciseStats}}" wx:key="type">
+        <view class="stats-info">
+          <text class="stats-name">{{item.type}}</text>
+          <text class="stats-count">{{item.count}}次</text>
+        </view>
+        <view class="stats-details">
+          <text class="stats-duration">{{item.totalDuration}}分钟</text>
+          <text class="stats-calories" wx:if="{{item.totalCalories}}">{{item.totalCalories}}卡</text>
+        </view>
+        <view class="progress-bar">
+          <view class="progress-fill progress-{{item.percentage || 0}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  
+  <!-- 饮食分析 -->
+  <view class="card diet-analysis" wx:if="{{dietAnalysis.mealTypes.length > 0}}">
+    <view class="card-title">饮食分析</view>
+    <view class="meal-stats">
+      <view class="meal-stat-item" wx:for="{{dietAnalysis.mealTypes}}" wx:key="mealType">
+        <view class="meal-info">
+          <text class="meal-name">{{item.mealTypeText}}</text>
+          <text class="meal-count">{{item.count}}次</text>
+        </view>
+        <view class="meal-calories">
+          <text class="calories-text">{{item.totalCalories}}卡路里</text>
+        </view>
+        <view class="meal-percentage">{{item.percentage}}%</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 日历热力图 -->
+  <view class="card calendar-heatmap" wx:if="{{calendarData.length > 0}}">
+    <view class="card-title">活跃度日历</view>
+
+    <!-- 月份翻阅控制 -->
+    <view class="calendar-month-navigation" wx:if="{{activeTab === 'all'}}">
+      <button class="calendar-month-nav-btn" bindtap="previousMonth" disabled="{{!canGoPrevious}}">
+        <text class="nav-arrow">‹</text>
+      </button>
+      <text class="current-month">{{currentMonthDisplay || '选择月份'}}</text>
+      <button class="calendar-month-nav-btn" bindtap="nextMonth" disabled="{{!canGoNext}}">
+        <text class="nav-arrow">›</text>
+      </button>
+    </view>
+
+    <view class="calendar-legend">
+      <text>少</text>
+      <view class="legend-colors">
+        <view class="legend-color legend-color-1"></view>
+        <view class="legend-color legend-color-2"></view>
+        <view class="legend-color legend-color-3"></view>
+        <view class="legend-color legend-color-4"></view>
+        <view class="legend-color legend-color-5"></view>
+      </view>
+      <text>多</text>
+    </view>
+
+    <!-- 星期标题 -->
+    <view class="calendar-weekdays">
+      <text class="weekday">日</text>
+      <text class="weekday">一</text>
+      <text class="weekday">二</text>
+      <text class="weekday">三</text>
+      <text class="weekday">四</text>
+      <text class="weekday">五</text>
+      <text class="weekday">六</text>
+    </view>
+
+    <view class="calendar-grid">
+      <view class="calendar-week" wx:for="{{calendarData}}" wx:key="weekIndex">
+        <view class="calendar-day {{day.className}} {{day.isToday ? 'today' : ''}}"
+              wx:for="{{item.days}}"
+              wx:for-item="day"
+              wx:key="dayIndex"
+              bindtap="showDayDetail"
+              data-date="{{day.date}}">
+          <text class="day-date" wx:if="{{day.date}}">{{day.day}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 成就徽章 -->
+  <view class="card achievements" wx:if="{{achievements.length > 0}}">
+    <view class="card-title">成就徽章</view>
+    <view class="achievements-grid">
+      <view class="achievement-item {{item.unlocked ? 'unlocked' : 'locked'}}"
+            wx:for="{{achievements}}"
+            wx:key="id">
+        <text class="achievement-icon">{{item.icon}}</text>
+        <text class="achievement-name">{{item.name}}</text>
+        <text class="achievement-desc">{{item.description}}</text>
+      </view>
+    </view>
+  </view>
+</view>

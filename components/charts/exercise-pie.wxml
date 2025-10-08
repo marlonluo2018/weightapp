@@ -1,0 +1,29 @@
+<!--exercise-pie.wxml-->
+<view class="exercise-pie">
+  <view class="chart-header">
+    <text class="chart-title">运动类型分布</text>
+  </view>
+
+  <view class="chart-container" wx:if="{{processedData.length > 0}}">
+    <view class="pie-canvas-container">
+      <canvas canvas-id="{{canvasId}}"
+              style="width: 300rpx; height: 300rpx;"
+              class="pie-canvas"></canvas>
+    </view>
+
+    <view class="legend">
+      <view class="legend-item"
+            wx:for="{{processedData}}"
+            wx:key="label">
+        <view class="legend-color legend-color-{{item.color || 'default'}}"></view>
+        <text class="legend-label">{{item.label}}</text>
+        <text class="legend-value">{{item.percentage}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="no-data" wx:else>
+    <text class="no-data-text">暂无运动数据</text>
+    <text class="no-data-tip">开始运动来查看类型分布</text>
+  </view>
+</view>

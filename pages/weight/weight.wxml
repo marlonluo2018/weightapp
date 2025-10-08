@@ -1,0 +1,130 @@
+<!--weight.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">体重记录</text>
+  </view>
+
+  <!-- 当前体重卡片 -->
+  <view class="card current-weight">
+    <view class="card-title">当前体重</view>
+    <view class="weight-display">
+      <text class="weight-value">{{currentWeight}}</text>
+      <text class="weight-unit">kg</text>
+    </view>
+    <text class="update-time">{{lastUpdateTime ? '更新于 ' + lastUpdateTime : '暂无记录'}}</text>
+  </view>
+
+  <!-- 快速记录 -->
+  <view class="card quick-record">
+    <view class="card-title">快速记录体重</view>
+
+    <!-- 今日记录提示 -->
+    <view class="today-record-notice" wx:if="{{hasTodayRecord}}">
+      <text class="notice-icon">⚠️</text>
+      <text class="notice-text">今天已有体重记录：{{todayRecordWeight}}kg，新记录将覆盖之前的记录</text>
+    </view>
+
+    <view class="weight-input-section">
+      <view class="input-group">
+        <input class="weight-input" type="digit" placeholder="输入体重"
+               value="{{newWeight}}" bindinput="onWeightInput" />
+        <text class="unit-text">kg</text>
+      </view>
+
+      <view class="date-section">
+        <text class="section-label">记录日期</text>
+        <picker mode="date" value="{{recordDate}}" bindchange="onDateChange">
+          <view class="date-picker">
+            <text>{{recordDate || '选择日期'}}</text>
+            <text class="calendar-icon">📅</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="time-section">
+        <text class="section-label">记录时间</text>
+        <picker mode="time" value="{{recordTime}}" bindchange="onTimeChange">
+          <view class="time-picker">
+            <text>{{recordTime || '选择时间'}}</text>
+            <text class="clock-icon">🕒</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="form-label">备注（可选）</text>
+        <textarea class="input textarea" placeholder="记录体重变化的原因、身体状况等"
+                  value="{{notes}}" bindinput="onNotesInput"></textarea>
+      </view>
+    </view>
+
+    <button class="btn submit-btn" bindtap="saveWeight" disabled="{{!canSave}}">
+      保存体重记录
+    </button>
+  </view>
+
+  <!-- 体重趋势 -->
+  <view class="card weight-trend" wx:if="{{weightHistory.length > 1}}">
+    <view class="card-title">体重趋势</view>
+    <view class="trend-stats">
+      <view class="trend-item">
+        <text class="trend-label">本周变化</text>
+        <text class="trend-value {{weekChange >= 0 ? 'weight-up' : 'weight-down'}}">
+          {{weekChange >= 0 ? '+' : ''}}{{weekChange}}kg
+        </text>
+      </view>
+      <view class="trend-item">
+        <text class="trend-label">本月变化</text>
+        <text class="trend-value {{monthChange >= 0 ? 'weight-up' : 'weight-down'}}">
+          {{monthChange >= 0 ? '+' : ''}}{{monthChange}}kg
+        </text>
+      </view>
+      <view class="trend-item">
+        <text class="trend-label">总体变化</text>
+        <text class="trend-value {{totalChange >= 0 ? 'weight-up' : 'weight-down'}}">
+          {{totalChange >= 0 ? '+' : ''}}{{totalChange}}kg
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="card history-records" wx:if="{{weightHistory.length > 0}}">
+    <view class="card-title">历史记录</view>
+    <view class="history-list">
+      <view class="history-item" wx:for="{{weightHistory}}" wx:key="id">
+        <view class="history-info">
+          <view class="history-weight">
+            <text class="weight-text">{{item.weight}}kg</text>
+            <text class="weight-change {{item.change >= 0 ? 'weight-up' : 'weight-down'}}" wx:if="{{item.change !== 0}}">
+              {{item.change >= 0 ? '↑' : '↓'}}{{Math.abs(item.change)}}kg
+            </text>
+          </view>
+          <text class="history-date">{{item.displayTime}}</text>
+          <text class="history-notes" wx:if="{{item.notes}}">{{item.notes}}</text>
+        </view>
+        <button class="btn btn-small btn-danger" bindtap="deleteRecord" data-id="{{item.id}}">
+          删除
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 体重目标 -->
+  <view class="card weight-goal">
+    <view class="card-title">体重目标</view>
+    <view class="goal-info">
+      <view class="goal-item">
+        <text class="goal-label">目标体重</text>
+        <text class="goal-value">{{targetWeight}}kg</text>
+      </view>
+      <view class="goal-item">
+        <text class="goal-label">距离目标</text>
+        <text class="goal-value {{distanceToGoal >= 0 ? 'positive' : 'negative'}}">
+          {{distanceToGoal >= 0 ? '还需减' : '已超过'}}{{Math.abs(distanceToGoal)}}kg
+        </text>
+      </view>
+    </view>
+  </view>
+</view>

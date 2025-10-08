@@ -1,0 +1,165 @@
+<!--profile.wxml-->
+<view class="container theme-{{themeBackground || 'default'}}">
+  <!-- 用户信息卡片 -->
+  <view class="card user-profile">
+    <view class="profile-header">
+      <view class="avatar-section">
+        <view class="avatar-container">
+          <image class="avatar-image" src="{{profile.avatar}}" wx:if="{{profile.avatar && profile.avatar !== 'dev_mock_avatar_selected'}}" mode="aspectFill"></image>
+          <view class="avatar-placeholder" wx:else>
+            <text class="avatar-emoji">👤</text>
+          </view>
+        </view>
+        <button class="change-avatar-btn" bindtap="changeAvatar">更换头像</button>
+      </view>
+      <view class="user-info">
+        <input class="nickname-input"
+               placeholder="输入昵称"
+               value="{{profile.nickname}}"
+               bindinput="onNicknameInput" />
+        <text class="join-time">加入时间: {{joinTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 身体数据 -->
+  <view class="card body-data">
+    <view class="card-title">身体数据</view>
+    <view class="data-grid">
+      <view class="data-row">
+        <view class="data-item">
+          <text class="data-label">身高</text>
+          <view class="data-input-group">
+            <input class="data-input"
+                   type="number"
+                   placeholder="身高"
+                   value="{{profile.height}}"
+                   bindinput="onHeightInput" />
+            <text class="data-unit">cm</text>
+          </view>
+        </view>
+        <view class="data-item">
+          <text class="data-label">初始体重</text>
+          <view class="data-input-group">
+            <input class="data-input"
+                   type="digit"
+                   placeholder="初始体重"
+                   value="{{profile.initialWeight}}"
+                   bindinput="onInitialWeightInput" />
+            <text class="data-unit">kg</text>
+          </view>
+        </view>
+      </view>
+      <view class="data-row">
+        <view class="data-item">
+          <text class="data-label">目标体重</text>
+          <view class="data-input-group">
+            <input class="data-input"
+                   type="digit"
+                   placeholder="目标体重"
+                   value="{{profile.targetWeight}}"
+                   bindinput="onTargetWeightInput" />
+            <text class="data-unit">kg</text>
+          </view>
+        </view>
+        <view class="data-item">
+          <text class="data-label">当前体重</text>
+          <view class="data-display-group">
+            <text class="data-display">{{profile.currentWeight || '--'}}</text>
+            <text class="data-unit">kg</text>
+          </view>
+          <text class="data-hint">自动更新自最新体重记录</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- BMI计算 -->
+    <view class="bmi-section" wx:if="{{bmi.value}}">
+      <view class="bmi-header">
+        <text class="bmi-label">BMI指数</text>
+        <text class="bmi-value {{bmi.category}}">{{bmi.value}}</text>
+      </view>
+      <text class="bmi-category {{bmi.category}}">{{bmi.categoryText}}</text>
+      <view class="bmi-scale">
+      <view class="bmi-progress-bar">
+        <view class="bmi-progress-fill {{bmi.category}} bmi-progress-50"></view>
+      </view>
+      <view class="bmi-scale-labels">
+        <text class="scale-label">偏瘦</text>
+        <text class="scale-label">正常</text>
+        <text class="scale-label">偏胖</text>
+        <text class="scale-label">肥胖</text>
+      </view>
+    </view>
+    </view>
+  </view>
+
+  <!-- 减肥目标 -->
+  <view class="card weight-goal">
+    <view class="card-title">减肥目标</view>
+    <view class="goal-form">
+      <view class="form-item">
+        <text class="form-label">计划开始日期</text>
+        <picker mode="date"
+                value="{{profile.planStartDate}}"
+                bindchange="onPlanStartDateChange">
+          <view class="picker-view">
+            <text>{{profile.planStartDate || '选择计划开始日期'}}</text>
+            <text class="picker-icon">📅</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="form-label">目标日期</text>
+        <picker mode="date"
+                value="{{profile.targetDate}}"
+                start="{{today}}"
+                bindchange="onTargetDateChange">
+          <view class="picker-view">
+            <text>{{profile.targetDate || '选择目标日期'}}</text>
+            <text class="picker-icon">📅</text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="form-label">减肥计划</text>
+        <textarea class="input textarea"
+                  placeholder="描述你的减肥计划和目标..."
+                  value="{{profile.plan}}"
+                  bindinput="onPlanInput"></textarea>
+      </view>
+
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-section">
+    <button class="btn save-btn" bindtap="saveProfile" disabled="{{!hasChanges}}">
+      保存修改
+    </button>
+  </view>
+
+  <!-- 快速操作 -->
+  <view class="card quick-actions">
+    <view class="card-title">快速操作</view>
+    <view class="action-list">
+      <button class="action-item" bindtap="exportData">
+        <text class="action-icon">📤</text>
+        <text class="action-text">导出数据</text>
+        <text class="arrow-icon">→</text>
+      </button>
+      <button class="action-item" bindtap="clearData">
+        <text class="action-icon">🗑️</text>
+        <text class="action-text">清空数据</text>
+        <text class="arrow-icon">→</text>
+      </button>
+      <button class="action-item" bindtap="showAbout">
+        <text class="action-icon">ℹ️</text>
+        <text class="action-text">关于应用</text>
+        <text class="arrow-icon">→</text>
+      </button>
+    </view>
+  </view>
+</view>

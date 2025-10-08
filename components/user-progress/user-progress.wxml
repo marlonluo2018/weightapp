@@ -1,0 +1,63 @@
+<!--user-progress.wxml-->
+<view class="user-progress">
+  <!-- 用户头像和基本信息 -->
+  <view class="user-info">
+    <view class="avatar-section">
+      <view class="avatar-container">
+        <image class="avatar-image" src="{{userInfo.avatar}}" wx:if="{{userInfo.avatar && userInfo.avatar !== 'dev_mock_avatar_selected'}}" mode="aspectFill"></image>
+        <view class="avatar-placeholder" wx:else>
+          <text class="avatar-emoji">👤</text>
+        </view>
+      </view>
+    </view>
+    <view class="user-details">
+      <text class="nickname">{{userInfo.nickname || '用户'}}</text>
+      <text class="persistence-days">开始减肥计划{{progress.persistenceDays}}天啦</text>
+    </view>
+    <view class="weight-info">
+      <text class="current-weight">{{userInfo.currentWeight || '--'}}kg</text>
+    </view>
+  </view>
+
+  <!-- 里程碑庆祝 -->
+  <view class="milestone-celebration" wx:if="{{showMilestone}}">
+    <view class="celebration-content">
+      <text class="celebration-emoji">🎉</text>
+      <text class="celebration-title">{{milestone.title}}</text>
+      <text class="celebration-desc">{{milestone.description}}</text>
+      <button class="celebration-btn" bindtap="closeCelebration">太棒了！</button>
+    </view>
+  </view>
+
+  <!-- 今日打卡数据 -->
+  <view class="today-checkin">
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.exerciseMinutes || 0}}</text>
+        <text class="stat-label">运动(分钟)</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{todayStats.dietRecords || 0}}</text>
+        <text class="stat-label">饮食(餐次)</text>
+      </view>
+    </view>
+    
+
+    <!-- 横向排列的打卡按钮 -->
+    <view class="action-buttons">
+      <button class="action-btn" bindtap="goToExercise">
+        <text class="action-icon">🏃</text>
+        <text class="action-text">运动打卡</text>
+      </button>
+      <button class="action-btn" bindtap="goToDiet">
+        <text class="action-icon">🍽️</text>
+        <text class="action-text">饮食记录</text>
+      </button>
+      <button class="action-btn" bindtap="goToWeight">
+        <text class="action-icon">⚖️</text>
+        <text class="action-text">体重记录</text>
+      </button>
+    </view>
+  </view>
+
+</view>

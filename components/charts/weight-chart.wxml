@@ -1,0 +1,20 @@
+<!--weight-chart.wxml-->
+<view class="weight-chart">
+  <view class="chart-header">
+    <text class="chart-title">体重趋势</text>
+    <text class="chart-subtitle" wx:if="{{chartData.length > 0}}">
+      最近{{chartData.length}}次记录
+    </text>
+  </view>
+
+  <view class="chart-container" wx:if="{{chartData.length > 0}}">
+    <canvas canvas-id="{{canvasId}}"
+            style="width: 750rpx;"
+            class="chart-canvas chart-height-{{height || 400}}"></canvas>
+  </view>
+
+  <view class="no-data" wx:else>
+    <text class="no-data-text">暂无体重数据</text>
+    <text class="no-data-tip">开始记录体重来查看趋势图表</text>
+  </view>
+</view>

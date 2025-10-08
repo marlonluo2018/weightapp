@@ -1,0 +1,207 @@
+/* simple-weight-chart.wxss */
+.simple-weight-chart {
+  background: white;
+  border-radius: 16rpx;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.chart-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.chart-subtitle {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.chart-container {
+  width: 100%;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  height: 200rpx;
+  padding: 20rpx 0;
+  gap: 15rpx;
+  overflow-x: auto;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60rpx;
+  flex: 1;
+}
+
+.bar-label {
+  font-size: 20rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+  text-align: center;
+}
+
+.bar-wrapper {
+  position: relative;
+  width: 40rpx;
+  height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.bar {
+  width: 100%;
+  border-radius: 6rpx 6rpx 0 0;
+  transition: all 0.3s ease;
+  min-height: 10rpx;
+}
+
+.bar-value {
+  font-size: 18rpx;
+  color: #333;
+  font-weight: bold;
+  margin-top: 8rpx;
+  text-align: center;
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200rpx;
+  text-align: center;
+}
+
+.no-data-text {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.no-data-tip {
+  font-size: 22rpx;
+  color: #ccc;
+}
+
+/* 柱状图高度样式 */
+.bar-height-0 { height: 0%; }
+.bar-height-1 { height: 1%; }
+.bar-height-2 { height: 2%; }
+.bar-height-3 { height: 3%; }
+.bar-height-4 { height: 4%; }
+.bar-height-5 { height: 5%; }
+.bar-height-6 { height: 6%; }
+.bar-height-7 { height: 7%; }
+.bar-height-8 { height: 8%; }
+.bar-height-9 { height: 9%; }
+.bar-height-10 { height: 10%; }
+.bar-height-11 { height: 11%; }
+.bar-height-12 { height: 12%; }
+.bar-height-13 { height: 13%; }
+.bar-height-14 { height: 14%; }
+.bar-height-15 { height: 15%; }
+.bar-height-16 { height: 16%; }
+.bar-height-17 { height: 17%; }
+.bar-height-18 { height: 18%; }
+.bar-height-19 { height: 19%; }
+.bar-height-20 { height: 20%; }
+.bar-height-21 { height: 21%; }
+.bar-height-22 { height: 22%; }
+.bar-height-23 { height: 23%; }
+.bar-height-24 { height: 24%; }
+.bar-height-25 { height: 25%; }
+.bar-height-26 { height: 26%; }
+.bar-height-27 { height: 27%; }
+.bar-height-28 { height: 28%; }
+.bar-height-29 { height: 29%; }
+.bar-height-30 { height: 30%; }
+.bar-height-31 { height: 31%; }
+.bar-height-32 { height: 32%; }
+.bar-height-33 { height: 33%; }
+.bar-height-34 { height: 34%; }
+.bar-height-35 { height: 35%; }
+.bar-height-36 { height: 36%; }
+.bar-height-37 { height: 37%; }
+.bar-height-38 { height: 38%; }
+.bar-height-39 { height: 39%; }
+.bar-height-40 { height: 40%; }
+.bar-height-41 { height: 41%; }
+.bar-height-42 { height: 42%; }
+.bar-height-43 { height: 43%; }
+.bar-height-44 { height: 44%; }
+.bar-height-45 { height: 45%; }
+.bar-height-46 { height: 46%; }
+.bar-height-47 { height: 47%; }
+.bar-height-48 { height: 48%; }
+.bar-height-49 { height: 49%; }
+.bar-height-50 { height: 50%; }
+.bar-height-51 { height: 51%; }
+.bar-height-52 { height: 52%; }
+.bar-height-53 { height: 53%; }
+.bar-height-54 { height: 54%; }
+.bar-height-55 { height: 55%; }
+.bar-height-56 { height: 56%; }
+.bar-height-57 { height: 57%; }
+.bar-height-58 { height: 58%; }
+.bar-height-59 { height: 59%; }
+.bar-height-60 { height: 60%; }
+.bar-height-61 { height: 61%; }
+.bar-height-62 { height: 62%; }
+.bar-height-63 { height: 63%; }
+.bar-height-64 { height: 64%; }
+.bar-height-65 { height: 65%; }
+.bar-height-66 { height: 66%; }
+.bar-height-67 { height: 67%; }
+.bar-height-68 { height: 68%; }
+.bar-height-69 { height: 69%; }
+.bar-height-70 { height: 70%; }
+.bar-height-71 { height: 71%; }
+.bar-height-72 { height: 72%; }
+.bar-height-73 { height: 73%; }
+.bar-height-74 { height: 74%; }
+.bar-height-75 { height: 75%; }
+.bar-height-76 { height: 76%; }
+.bar-height-77 { height: 77%; }
+.bar-height-78 { height: 78%; }
+.bar-height-79 { height: 79%; }
+.bar-height-80 { height: 80%; }
+.bar-height-81 { height: 81%; }
+.bar-height-82 { height: 82%; }
+.bar-height-83 { height: 83%; }
+.bar-height-84 { height: 84%; }
+.bar-height-85 { height: 85%; }
+.bar-height-86 { height: 86%; }
+.bar-height-87 { height: 87%; }
+.bar-height-88 { height: 88%; }
+.bar-height-89 { height: 89%; }
+.bar-height-90 { height: 90%; }
+.bar-height-91 { height: 91%; }
+.bar-height-92 { height: 92%; }
+.bar-height-93 { height: 93%; }
+.bar-height-94 { height: 94%; }
+.bar-height-95 { height: 95%; }
+.bar-height-96 { height: 96%; }
+.bar-height-97 { height: 97%; }
+.bar-height-98 { height: 98%; }
+.bar-height-99 { height: 99%; }
+.bar-height-100 { height: 100%; }
+
+/* 柱状图渐变样式 */
+.bar-gradient-default {
+  background: linear-gradient(180deg, #07c160, #95ec69);
+}
