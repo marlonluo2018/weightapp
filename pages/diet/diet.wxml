@@ -36,6 +36,27 @@
   <view class="card diet-form">
     <view class="card-title">饮食详情</view>
 
+    <!-- AI识图功能 -->
+    <view class="ai-recognition">
+      <view class="ai-title">
+        <text class="ai-icon">🤖</text>
+        <text class="ai-text">AI智能识图</text>
+      </view>
+      <view class="ai-buttons">
+        <button class="ai-btn" bindtap="takePhoto">
+          <text class="ai-btn-icon">📷</text>
+          <text>拍照识别</text>
+        </button>
+        <button class="ai-btn" bindtap="chooseImage">
+          <text class="ai-btn-icon">🖼️</text>
+          <text>选择图片</text>
+        </button>
+      </view>
+      <view class="ai-status" wx:if="{{aiStatus}}">
+        <text class="ai-status-text">{{aiStatus}}</text>
+      </view>
+    </view>
+
     <view class="form-item">
       <text class="form-label">餐次</text>
       <input class="input" placeholder="请选择餐次"
@@ -49,14 +70,14 @@
     </view>
 
     <view class="form-item">
-      <text class="form-label">份量（克）</text>
-      <input class="input" type="number" placeholder="请输入食物份量"
+      <text class="form-label">份量（克，可选）</text>
+      <input class="input" type="number" placeholder="请输入食物份量（可选）"
              value="{{portion}}" bindinput="onPortionInput" />
     </view>
 
     <view class="form-item">
-      <text class="form-label">预估卡路里（可选）</text>
-      <input class="input" type="number" placeholder="请输入预估卡路里"
+      <text class="form-label">预估卡路里</text>
+      <input class="input" type="number" placeholder="请输入预估卡路里（必填）"
              value="{{calories}}" bindinput="onCaloriesInput" />
     </view>
 

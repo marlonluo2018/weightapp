@@ -17,6 +17,15 @@ Page({
       'swimming': '游泳',
       'yoga': '瑜伽',
       'gym': '健身'
+    },
+    // 运动类型对应的卡路里消耗率（每分钟消耗的卡路里）
+    calorieRateMap: {
+      'running': 10,    // 跑步：约10卡路里/分钟
+      'walking': 4,     // 步行：约4卡路里/分钟
+      'cycling': 8,     // 骑行：约8卡路里/分钟
+      'swimming': 11,   // 游泳：约11卡路里/分钟
+      'yoga': 3,        // 瑜伽：约3卡路里/分钟
+      'gym': 7          // 健身：约7卡路里/分钟
     }
   },
 
@@ -31,12 +40,28 @@ Page({
   selectExerciseType(e) {
     const type = e.currentTarget.dataset.type;
     const typeName = this.data.exerciseTypeMap[type];
-
+    
     this.setData({
       selectedType: type,
       exerciseType: typeName
     });
-
+    
+    // 获取当前运动类型的卡路里消耗率
+    const calorieRate = this.data.calorieRateMap[type];
+    
+    // 显示卡路里计算公式提示
+    wx.showToast({
+      title: `${typeName}卡路里计算：${calorieRate}卡/分钟 × 运动时长`,
+      icon: 'none',
+      duration: 3000
+    });
+    
+    // 如果有运动时长，自动计算卡路里
+    if (this.data.duration) {
+      const calculatedCalories = Math.round(parseInt(this.data.duration) * calorieRate);
+      this.setData({ calories: calculatedCalories.toString() });
+    }
+    
     this.checkCanSave();
   },
 
@@ -49,9 +74,24 @@ Page({
   },
 
   onDurationInput(e) {
-    this.setData({
-      duration: e.detail.value
-    });
+    const duration = e.detail.value;
+    this.setData({ duration });
+    
+    // 如果有选中的运动类型，自动计算卡路里
+    if (this.data.selectedType && duration) {
+      const calorieRate = this.data.calorieRateMap[this.data.selectedType];
+      const calculatedCalories = Math.round(parseInt(duration) * calorieRate);
+      this.setData({ calories: calculatedCalories.toString() });
+      
+      // 显示卡路里计算公式提示
+      const typeName = this.data.exerciseTypeMap[this.data.selectedType];
+      wx.showToast({
+        title: `${typeName}卡路里计算：${calorieRate}卡/分钟 × ${duration}分钟 = ${calculatedCalories}卡`,
+        icon: 'none',
+        duration: 3000
+      });
+    }
+    
     this.checkCanSave();
   },
 
@@ -59,6 +99,7 @@ Page({
     this.setData({
       calories: e.detail.value
     });
+    this.checkCanSave();
   },
 
   onNotesInput(e) {
@@ -68,8 +109,12 @@ Page({
   },
 
   checkCanSave() {
-    const { exerciseType, duration } = this.data;
-    const canSave = exerciseType.trim() !== '' && duration.trim() !== '' && parseInt(duration) > 0;
+    const { exerciseType, duration, calories } = this.data;
+    const canSave = exerciseType.trim() !== '' && 
+                   duration.trim() !== '' && 
+                   parseInt(duration) > 0 &&
+                   calories.trim() !== '' &&
+                   parseInt(calories) > 0;
     this.setData({ canSave });
   },
 
@@ -81,7 +126,7 @@ Page({
     const exerciseRecord = {
       type: this.data.exerciseType,
       duration: parseInt(this.data.duration),
-      calories: this.data.calories ? parseInt(this.data.calories) : null,
+      calories: parseInt(this.data.calories), // 移除可选判断，直接使用
       notes: this.data.notes,
       timestamp: Date.now()
     };

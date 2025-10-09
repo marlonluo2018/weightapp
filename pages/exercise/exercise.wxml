@@ -59,9 +59,10 @@
     </view>
 
     <view class="form-item">
-      <text class="form-label">消耗卡路里（可选）</text>
-      <input class="input" type="number" placeholder="请输入消耗的卡路里"
+      <text class="form-label">消耗卡路里</text>
+      <input class="input" type="number" placeholder="请输入消耗的卡路里（必填）"
              value="{{calories}}" bindinput="onCaloriesInput" />
+      <text class="form-hint">卡路里会根据运动类型和时长自动计算，您也可以手动调整</text>
     </view>
 
     <view class="form-item">
